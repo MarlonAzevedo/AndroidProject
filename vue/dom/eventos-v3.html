@@ -1,0 +1,45 @@
+<script src="https://unpkg.com/vue"></script>
+<div id="app">
+    <p>{{ contador }}</p>
+    <button v-on:click='soma'>soma 1</button>
+    <p v-on:mousemove='atualizarXY'>
+        mouse: {{x}} e {{y}}
+        <span v-on:mousemove='parar'> parar aqui</span>
+        <span v-on:mousemove.stop=''> parar aqui</span><!--faz o mesmo da linha de sima mais sem a função-->
+    </p>
+    <a v-on:click.prevent="" href="https://www.google.com/">Google</a><!--bloquei o link-->
+    <a v-on:click="naoClicar" href="https://www.google.com/">Google</a><!--bloquei o link-->
+    <hr>
+    <input type="text" v-on:keyup='exibirAlerta'><!--sempre que eu apertar uma tecla vai aparecer um alerta-->
+    <hr>
+    <input type="text" v-on:keyup.enter='exibirAlerta'><!--sempre que eu apertar o enter vai aparecer um alerta-->
+</div>
+
+<script>
+ new Vue({
+     el:'#app',
+     data:{
+         contador:0,
+         x:0,
+         y:0
+     },
+     methods:{
+         soma(){
+            this.contador++
+         },
+         atualizarXY(event){
+            this.x = event.clientX
+            this.y = event.clientY
+         },
+         parar(event){
+            event.stopPropagation()
+         },
+         naoClicar(event){
+            event.preventDefault()
+         },
+         exibirAlerta(){
+             alert('estou te vendo')
+         }
+     }
+ })    
+</script>
